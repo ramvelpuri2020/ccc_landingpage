@@ -1,3 +1,4 @@
+import type React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -58,87 +59,132 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* App Screenshots */}
+        {/* App Screenshots with Device Frames */}
         <div className="relative w-full max-w-6xl">
-          {/* Desktop Layout */}
-          <div className="hidden md:flex justify-center items-center gap-8 relative">
+          {/* Desktop Layout - Phones closer together */}
+          <div className="hidden md:flex justify-center items-center relative">
             {/* Left Image - Dashboard */}
-            <div className="transform -rotate-6 hover:rotate-0 transition-all duration-500 hover:scale-105">
+            <div className="transform -rotate-6 hover:rotate-0 transition-all duration-500 hover:scale-105 -mr-10 z-10">
               <div className="relative">
+                <PhoneFrame>
+                  <Image
+                    src="/app-dashboard-new.png"
+                    alt="Dashboard Screen"
+                    width={280}
+                    height={560}
+                    className="w-full h-full object-cover"
+                  />
+                </PhoneFrame>
+              </div>
+            </div>
+
+            {/* Center Image - Community (Featured) */}
+            <div className="transform scale-110 z-20 hover:scale-115 transition-all duration-500">
+              <div className="relative">
+                <PhoneFrame featured>
+                  <Image
+                    src="/app-community-blue.png"
+                    alt="Community Screen"
+                    width={320}
+                    height={640}
+                    className="w-full h-full object-cover"
+                  />
+                </PhoneFrame>
+              </div>
+            </div>
+
+            {/* Right Image - Campaigns */}
+            <div className="transform rotate-6 hover:rotate-0 transition-all duration-500 hover:scale-105 -ml-10 z-10">
+              <div className="relative">
+                <PhoneFrame>
+                  <Image
+                    src="/app-campaigns-new.png"
+                    alt="Campaigns Screen"
+                    width={280}
+                    height={560}
+                    className="w-full h-full object-cover"
+                  />
+                </PhoneFrame>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Layout - Improved visibility */}
+          <div className="md:hidden flex justify-center items-center relative h-[400px] mt-10">
+            {/* Left Image - Dashboard */}
+            <div className="absolute left-[5%] z-10 transform -rotate-6 scale-[0.65]">
+              <PhoneFrame>
                 <Image
                   src="/app-dashboard-new.png"
                   alt="Dashboard Screen"
                   width={280}
                   height={560}
-                  className="rounded-[2.5rem] shadow-2xl border border-gray-200"
+                  className="w-full h-full object-cover"
                 />
-              </div>
+              </PhoneFrame>
             </div>
 
             {/* Center Image - Community (Featured) */}
-            <div className="transform scale-110 z-10 hover:scale-115 transition-all duration-500">
-              <div className="relative">
+            <div className="absolute z-30 transform scale-[0.75]">
+              <PhoneFrame featured>
                 <Image
                   src="/app-community-blue.png"
                   alt="Community Screen"
                   width={320}
                   height={640}
-                  className="rounded-[2.5rem] shadow-2xl border border-gray-200"
+                  className="w-full h-full object-cover"
                 />
-              </div>
+              </PhoneFrame>
             </div>
 
             {/* Right Image - Campaigns */}
-            <div className="transform rotate-6 hover:rotate-0 transition-all duration-500 hover:scale-105">
-              <div className="relative">
+            <div className="absolute right-[5%] z-20 transform rotate-6 scale-[0.65]">
+              <PhoneFrame>
                 <Image
                   src="/app-campaigns-new.png"
                   alt="Campaigns Screen"
                   width={280}
                   height={560}
-                  className="rounded-[2.5rem] shadow-2xl border border-gray-200"
+                  className="w-full h-full object-cover"
                 />
-              </div>
-            </div>
-          </div>
-
-          {/* Mobile Layout */}
-          <div className="md:hidden flex justify-center items-center relative h-[400px]">
-            {/* Left Image - Dashboard */}
-            <div className="absolute left-0 z-10 transform -rotate-12 scale-75">
-              <Image
-                src="/app-dashboard-new.png"
-                alt="Dashboard Screen"
-                width={200}
-                height={400}
-                className="rounded-[2rem] shadow-xl border border-gray-200"
-              />
-            </div>
-
-            {/* Center Image - Community (Featured) */}
-            <div className="absolute z-30 transform scale-90">
-              <Image
-                src="/app-community-blue.png"
-                alt="Community Screen"
-                width={220}
-                height={440}
-                className="rounded-[2rem] shadow-2xl border border-gray-200"
-              />
-            </div>
-
-            {/* Right Image - Campaigns */}
-            <div className="absolute right-0 z-20 transform rotate-12 scale-75">
-              <Image
-                src="/app-campaigns-new.png"
-                alt="Campaigns Screen"
-                width={200}
-                height={400}
-                className="rounded-[2rem] shadow-xl border border-gray-200"
-              />
+              </PhoneFrame>
             </div>
           </div>
         </div>
       </main>
+    </div>
+  )
+}
+
+function PhoneFrame({ children, featured = false }: { children: React.ReactNode; featured?: boolean }) {
+  return (
+    <div className={`relative ${featured ? "drop-shadow-2xl" : "drop-shadow-xl"}`}>
+      {/* Phone Frame */}
+      <div className={`relative bg-gray-900 rounded-[2.5rem] p-2 ${featured ? "ring-4 ring-blue-500/20" : ""}`}>
+        {/* Screen */}
+        <div className="relative bg-black rounded-[2rem] overflow-hidden">
+          {/* Notch */}
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 z-10">
+            <div className="bg-black rounded-b-2xl px-6 py-1">
+              <div className="w-16 h-1 bg-gray-800 rounded-full"></div>
+            </div>
+          </div>
+
+          {/* Screen Content */}
+          <div className="relative w-full h-full">{children}</div>
+
+          {/* Home Indicator */}
+          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 z-10">
+            <div className="w-32 h-1 bg-white/30 rounded-full"></div>
+          </div>
+        </div>
+
+        {/* Side Buttons */}
+        <div className="absolute left-0 top-20 w-1 h-8 bg-gray-700 rounded-r-full"></div>
+        <div className="absolute left-0 top-32 w-1 h-12 bg-gray-700 rounded-r-full"></div>
+        <div className="absolute left-0 top-48 w-1 h-12 bg-gray-700 rounded-r-full"></div>
+        <div className="absolute right-0 top-28 w-1 h-16 bg-gray-700 rounded-l-full"></div>
+      </div>
     </div>
   )
 }
