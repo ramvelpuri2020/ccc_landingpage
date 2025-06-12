@@ -1,3 +1,4 @@
+import type React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -54,87 +55,119 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* App Screenshots - No frames, just the images */}
+        {/* App Screenshots with Perfect Frames */}
         <div className="relative w-full max-w-6xl">
-          {/* Desktop Layout - Screenshots closer together */}
+          {/* Desktop Layout */}
           <div className="hidden md:flex justify-center items-center relative">
             {/* Left Image - Dashboard */}
             <div className="transform -rotate-6 hover:rotate-0 transition-all duration-500 hover:scale-105 -mr-16 z-10">
-              <Image
-                src="/dashboard-screen.png"
-                alt="Dashboard Screen"
-                width={280}
-                height={560}
-                className="w-auto h-auto"
-                priority
-              />
+              <PhoneFrame>
+                <Image
+                  src="/dashboard-screen.png"
+                  alt="Dashboard Screen"
+                  fill
+                  className="object-cover rounded-[36px]"
+                  priority
+                />
+              </PhoneFrame>
             </div>
 
             {/* Center Image - Community (Featured) */}
             <div className="transform scale-110 z-20 hover:scale-115 transition-all duration-500">
-              <Image
-                src="/community-screen.png"
-                alt="Community Screen"
-                width={320}
-                height={640}
-                className="w-auto h-auto"
-                priority
-              />
+              <PhoneFrame>
+                <Image
+                  src="/community-screen.png"
+                  alt="Community Screen"
+                  fill
+                  className="object-cover rounded-[36px]"
+                  priority
+                />
+              </PhoneFrame>
             </div>
 
             {/* Right Image - Campaigns */}
             <div className="transform rotate-6 hover:rotate-0 transition-all duration-500 hover:scale-105 -ml-16 z-10">
-              <Image
-                src="/campaigns-screen.png"
-                alt="Campaigns Screen"
-                width={280}
-                height={560}
-                className="w-auto h-auto"
-                priority
-              />
+              <PhoneFrame>
+                <Image
+                  src="/campaigns-screen.png"
+                  alt="Campaigns Screen"
+                  fill
+                  className="object-cover rounded-[36px]"
+                  priority
+                />
+              </PhoneFrame>
             </div>
           </div>
 
-          {/* Mobile Layout - Improved visibility */}
-          <div className="md:hidden flex justify-center items-center relative h-[500px] mt-10">
-            {/* Left Image - Dashboard */}
-            <div className="absolute left-[5%] z-10 transform -rotate-6 scale-[0.7]">
-              <Image
-                src="/dashboard-screen.png"
-                alt="Dashboard Screen"
-                width={280}
-                height={560}
-                className="w-auto h-auto"
-                priority
-              />
-            </div>
+          {/* Mobile Layout */}
+          <div className="md:hidden flex justify-center items-center relative">
+            <div className="relative h-[500px] w-full flex justify-center">
+              {/* Left Image - Dashboard */}
+              <div className="absolute transform -rotate-6 z-10" style={{ left: "calc(50% - 100px)" }}>
+                <PhoneFrameMobile>
+                  <Image
+                    src="/dashboard-screen.png"
+                    alt="Dashboard Screen"
+                    fill
+                    className="object-cover rounded-[24px]"
+                    priority
+                  />
+                </PhoneFrameMobile>
+              </div>
 
-            {/* Center Image - Community (Featured) */}
-            <div className="absolute z-30 transform scale-[0.8]">
-              <Image
-                src="/community-screen.png"
-                alt="Community Screen"
-                width={320}
-                height={640}
-                className="w-auto h-auto"
-                priority
-              />
-            </div>
+              {/* Center Image - Community (Featured) */}
+              <div className="absolute transform scale-110 z-20">
+                <PhoneFrameMobile>
+                  <Image
+                    src="/community-screen.png"
+                    alt="Community Screen"
+                    fill
+                    className="object-cover rounded-[24px]"
+                    priority
+                  />
+                </PhoneFrameMobile>
+              </div>
 
-            {/* Right Image - Campaigns */}
-            <div className="absolute right-[5%] z-20 transform rotate-6 scale-[0.7]">
-              <Image
-                src="/campaigns-screen.png"
-                alt="Campaigns Screen"
-                width={280}
-                height={560}
-                className="w-auto h-auto"
-                priority
-              />
+              {/* Right Image - Campaigns */}
+              <div className="absolute transform rotate-6 z-10" style={{ right: "calc(50% - 100px)" }}>
+                <PhoneFrameMobile>
+                  <Image
+                    src="/campaigns-screen.png"
+                    alt="Campaigns Screen"
+                    fill
+                    className="object-cover rounded-[24px]"
+                    priority
+                  />
+                </PhoneFrameMobile>
+              </div>
             </div>
           </div>
         </div>
       </main>
+    </div>
+  )
+}
+
+// Phone frame component for desktop
+function PhoneFrame({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      className="relative bg-black rounded-[40px] p-[3px] overflow-hidden"
+      style={{ width: "270px", height: "550px" }}
+    >
+      <div className="relative bg-white rounded-[38px] overflow-hidden h-full w-full">{children}</div>
+    </div>
+  )
+}
+
+// Phone frame component for mobile (smaller)
+function PhoneFrameMobile({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      className="relative bg-black rounded-[28px] p-[2px] overflow-hidden"
+      style={{ width: "180px", height: "370px" }}
+    >
+      <div className="relative bg-white rounded-[26px] overflow-hidden h-full w-full">{children}</div>
     </div>
   )
 }
