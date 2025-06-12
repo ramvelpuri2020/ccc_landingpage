@@ -16,7 +16,7 @@ export default function Home() {
 
       {/* Hero Section - Adjusted padding for mobile */}
       <main className="container mx-auto px-4 py-12 sm:py-20 flex flex-col items-center">
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-center max-w-5xl leading-tight text-gray-900 mb-6">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-center max-w-5xl leading-tight text-gray-900 mb-6 font-heading">
           Where College Creators{" "}
           <span className="bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent">
             Connect, Grow, and Earn

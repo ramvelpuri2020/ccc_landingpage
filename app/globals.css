@@ -32,20 +32,15 @@
 body {
   color: hsl(var(--foreground));
   background: hsl(var(--background));
-  font-family: var(--font-bricolage), sans-serif;
+  font-family: var(--font-inter), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1 {
   font-family: var(--font-bricolage), sans-serif;
   letter-spacing: -0.025em;
-  font-weight: 600;
+  font-weight: 900;
 }
 
 /* Custom scrollbar */
